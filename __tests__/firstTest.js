@@ -1,5 +1,4 @@
-const { Builder, until, By, assertEquals, assert} = require("selenium-webdriver");
-const { elementTextContains } = require("selenium-webdriver/lib/until");
+const { Builder, until, By } = require("selenium-webdriver");
 const { expect } = require("expect");
 
 
