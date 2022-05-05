@@ -1,4 +1,7 @@
-const { Builder, until, By } = require("selenium-webdriver");
+const { Builder, until, By, assertEquals, assert} = require("selenium-webdriver");
+const { elementTextContains } = require("selenium-webdriver/lib/until");
+const { expect } = require("expect");
+
 
 async function startWait() {
   await new Promise((resolve) =>
@@ -8,7 +11,7 @@ async function startWait() {
   );
 }
 
-async function navigation() {
+test('First test - Check if name is correct', async () => {
   let driver = await new Builder().forBrowser("chrome").build();
   await driver.manage().setTimeouts({ implicit: 10000 });
 
@@ -37,7 +40,7 @@ async function navigation() {
     // Switch to the iframe to click the buttton
     await driver.switchTo().frame(inputAlertTabiFrame);
 
-    const inputAlertButton = await driver.findElement(By.xpath('//button[text()="Click the button to demonstrate the Input box."]'))
+    const inputAlertButton = await driver.findElement(By.xpath('//button[text()="Click the button to demonstrate the Input box."]'));
     await inputAlertButton.click();
     // Wait for the alert to be displayed
     await driver.wait(until.alertIsPresent());
@@ -49,9 +52,11 @@ async function navigation() {
     //Press the OK button
     await alert.accept();
 
-    // Return to the top main context (outside of iframe)
-    await driver.switchTo().defaultContent();
-  }
-}
+    //Validate sendKeys
+    let nameInput = await driver.findElement(By.id("demo")).getText();
+    expect(nameInput.includes("Vita")).toBeTruthy();
 
-navigation();
+    // Return to the top main context (outside of iframe)
+    // await driver.switchTo().defaultContent();
+  }
+}, 30000);
