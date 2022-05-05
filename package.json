@@ -1,6 +1,7 @@
 {
   "name": "visma_task",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "expect": "^28.0.2",
+    "node-fetch": "^2.6.7",
     "selenium-webdriver": "^4.1.2"
   },
   "devDependencies": {
